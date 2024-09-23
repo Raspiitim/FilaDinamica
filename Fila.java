@@ -132,6 +132,117 @@ public class Fila {
         }
     }
 
+    // Retorna o último elemento da fila (sem remover)
+public Object back() {
+    return this.fim != null ? this.fim.getElemento() : null;
+}
+
+// Remove e retorna todos os elementos da fila em um array
+public Object[] dequeueAll() {
+    Object[] elementos = new Object[this.tamanho];
+    for (int i = 0; i < this.tamanho; i++) {
+        elementos[i] = this.dequeue();
+    }
+    return elementos;
+}
+
+// Verifica se um elemento está na fila
+public boolean contains(Object elemento) {
+    No atual = this.inicio;
+    while (atual != null) {
+        if (atual.getElemento().equals(elemento)) {
+            return true;
+        }
+        atual = atual.getProximo();
+    }
+    return false;
+}
+
+// Limpa todos os elementos da fila
+public void clear() {
+    this.inicio = null;
+    this.fim = null;
+    this.tamanho = 0;
+}
+
+// Retorna os elementos da fila como um array
+public Object[] toArray() {
+    Object[] elementos = new Object[this.tamanho];
+    No atual = this.inicio;
+    for (int i = 0; i < this.tamanho; i++) {
+        elementos[i] = atual.getElemento();
+        atual = atual.getProximo();
+    }
+    return elementos;
+}
+
+// Retorna uma representação em string da fila
+@Override
+public String toString() {
+    StringBuilder sb = new StringBuilder();
+    No atual = this.inicio;
+    sb.append("[");
+    while (atual != null) {
+        sb.append(atual.getElemento());
+        if (atual.getProximo() != null) {
+            sb.append(", ");
+        }
+        atual = atual.getProximo();
+    }
+    sb.append("]");
+    return sb.toString();
+}
+
+// Inverte a fila (não altera a ordem original)
+public Fila reverse() {
+    Fila filaInvertida = new Fila();
+    No atual = this.inicio;
+    while (atual != null) {
+        filaInvertida.enqueue(atual.getElemento());
+        atual = atual.getProximo();
+    }
+    return filaInvertida;
+}
+
+// Retorna o elemento na posição especificada (0-base)
+public Object get(int index) {
+    if (index < 0 || index >= this.tamanho) {
+        throw new IndexOutOfBoundsException("Índice fora dos limites.");
+    }
+    No atual = this.inicio;
+    for (int i = 0; i < index; i++) {
+        atual = atual.getProximo();
+    }
+    return atual.getElemento();
+}
+
+// Retorna o primeiro elemento e o remove (Dequeue)
+public Object dequeueFirst() {
+    return this.dequeue();
+}
+
+// Retorna o número de elementos na fila (size)
+public int count() {
+    return this.size();
+}
+
+// Retorna a posição de um elemento na fila (0-base)
+public int indexOf(Object elemento) {
+    int index = 0;
+    No atual = this.inicio;
+
+    while (atual != null) {
+        if (atual.getElemento().equals(elemento)) {
+            return index; // Retorna a posição se o elemento for encontrado
+        }
+        atual = atual.getProximo();
+        index++;
+    }
+
+    return -1; // Retorna -1 se o elemento não for encontrado
+}
+
+
     public No getInicio() {
         return inicio;
     }
