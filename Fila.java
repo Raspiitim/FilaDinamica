@@ -242,36 +242,21 @@ public int indexOf(Object elemento) {
     return -1; // Retorna -1 se o elemento não for encontrado
 }
 
-    package Dinamica;
+    // Método para inverter a fila usando uma fila auxiliar
+    public void inverterFila() {
+        Fila filaAuxiliar = new Fila();
 
-public class Fila {
-    private No inicio;
-    private No fim;
-    private int tamanho;
-
-    // Restante da classe...
-
-    // Método para inverter a fila sem usar Stack
-    public void inverter() {
-        if (this.isEmpty()) {
-            return;
+        // Deslocar elementos da fila original para a fila auxiliar
+        while (front != null) {
+            filaAuxiliar.enqueue(dequeue());
         }
 
-        Object[] elementos = new Object[this.tamanho];  // Cria um array temporário para armazenar os elementos
-        int i = 0;
-
-        // Desenfileira todos os elementos e armazena no array
-        while (!this.isEmpty()) {
-            elementos[i++] = this.dequeue();
-        }
-
-        // Reenfileira os elementos em ordem inversa
-        for (int j = elementos.length - 1; j >= 0; j--) {
-            this.enqueue(elementos[j]);
+        // Deslocar elementos da fila auxiliar de volta para a fila original
+        while (filaAuxiliar.front != null) {
+            enqueue(filaAuxiliar.dequeue());
         }
     }
-}
-
+    
     public No getInicio() {
         return inicio;
     }
