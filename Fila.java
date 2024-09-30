@@ -243,19 +243,20 @@ public int indexOf(Object elemento) {
 }
 
     // Método para inverter a fila usando uma fila auxiliar
-    public void inverterFila() {
-        Fila filaAuxiliar = new Fila();
+public void inverterFila() {
+    Fila filaAuxiliar = new Fila();
 
-        // Deslocar elementos da fila original para a fila auxiliar
-        while (front != null) {
-            filaAuxiliar.enqueue(dequeue());
-        }
-
-        // Deslocar elementos da fila auxiliar de volta para a fila original
-        while (filaAuxiliar.front != null) {
-            enqueue(filaAuxiliar.dequeue());
-        }
+    // Deslocar elementos da fila original para a fila auxiliar
+    while (inicio != null) {
+        filaAuxiliar.enqueue(dequeue());
     }
+
+    // Deslocar elementos da fila auxiliar de volta para a fila original
+    while (!filaAuxiliar.isEmpty()) {
+        enqueue(filaAuxiliar.dequeue());
+    }
+}
+
     
     public No getInicio() {
         return inicio;
